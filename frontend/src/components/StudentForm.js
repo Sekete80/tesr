@@ -33,44 +33,6 @@ function StudentForm() {
     { id: 'rating', label: 'Rating' }
   ];
 
-  // Quick Attendance Sign-in Handler
-  const handleQuickAttendance = async () => {
-    if (!monitoringForm.student_id || !monitoringForm.course_id) {
-      alert('Please enter both Student ID and Course ID first.');
-      return;
-    }
-
-    try {
-      const currentTime = new Date().toLocaleString();
-      const attendanceData = {
-        ...monitoringForm,
-        sign_in_time: currentTime
-      };
-
-      const res = await fetch(`${API_URL}/api/student_monitoring`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(attendanceData),
-      });
-      
-      if (res.ok) {
-        setAttendanceRecorded(true);
-        setAttendanceTime(currentTime);
-        alert(`Attendance recorded successfully at ${currentTime}`);
-        
-        // Reset only the attendance-related fields, keep student_id and course_id
-        setMonitoringForm(prev => ({
-          ...prev,
-          attendance_status: 'present',
-          participation_notes: '',
-          issues_observed: ''
-        }));
-      }
-    } catch (err) {
-      alert('Error recording attendance.');
-    }
-  };
-
   // Monitoring Tab Handler
   const handleMonitoringSubmit = async (e) => {
     e.preventDefault();
