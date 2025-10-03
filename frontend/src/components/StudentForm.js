@@ -145,57 +145,6 @@ function StudentForm() {
         <div>
           <h4>Class Monitoring & Attendance</h4>
           
-          {/* Quick Attendance Section */}
-          <div className="card mb-4">
-            <div className="card-header bg-primary text-white">
-              <h5 className="mb-0">Quick Attendance Sign-in</h5>
-            </div>
-            <div className="card-body">
-              <div className="row g-3 align-items-end">
-                <div className="col-md-4">
-                  <label className="form-label">Student ID</label>
-                  <input 
-                    type="text" 
-                    name="student_id" 
-                    className="form-control" 
-                    placeholder="Enter Student ID"
-                    value={monitoringForm.student_id} 
-                    onChange={handleChange(setMonitoringForm, monitoringForm)} 
-                    required 
-                  />
-                </div>
-                <div className="col-md-4">
-                  <label className="form-label">Course ID</label>
-                  <input 
-                    type="text" 
-                    name="course_id" 
-                    className="form-control" 
-                    placeholder="Enter Course ID"
-                    value={monitoringForm.course_id} 
-                    onChange={handleChange(setMonitoringForm, monitoringForm)} 
-                    required 
-                  />
-                </div>
-                <div className="col-md-4">
-                  <button 
-                    className="btn btn-success w-100" 
-                    type="button"
-                    onClick={handleQuickAttendance}
-                    disabled={attendanceRecorded}
-                  >
-                    {attendanceRecorded ? 'Attendance Recorded' : 'Sign In Attendance'}
-                  </button>
-                </div>
-              </div>
-              
-              {attendanceRecorded && (
-                <div className="alert alert-success mt-3 mb-0" role="alert">
-                  <strong>Attendance confirmed!</strong> Signed in at: {attendanceTime}
-                </div>
-              )}
-            </div>
-          </div>
-
           {/* Detailed Monitoring Form */}
           <div className="card">
             <div className="card-header">

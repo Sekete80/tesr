@@ -81,17 +81,14 @@ function App() {
           <div className="row justify-content-center">
             <div className="col-md-6">
               <div className="text-center">
-                <p>Don't have an account? </p>
-                <button 
-                  className="btn btn-link" 
-                  onClick={switchToRegister}
-                >
+                <button className="btn btn-link" onClick={switchToRegister}>
                   Register here
                 </button>
               </div>
             </div>
           </div>
         </div>
+        <footer>&copy;2025 Limkokwing University of Creative Technology | All Rights Reserved</footer>
       </div>
     );
   }
@@ -104,7 +101,6 @@ function App() {
           <div className="row justify-content-center">
             <div className="col-md-6">
               <div className="text-center">
-                <p>Already have an account? </p>
                 <button 
                   className="btn btn-link" 
                   onClick={switchToLogin}
@@ -115,6 +111,7 @@ function App() {
             </div>
           </div>
         </div>
+        <footer>&copy;2025 Limkokwing University of Creative Technology | All Rights Reserved</footer>
       </div>
     );
   }
@@ -136,12 +133,15 @@ function App() {
           </div>
         </div>
       </nav>
+      
 
       {/* Main Content */}
       <div className="container mt-4">
         {renderDashboard()}
       </div>
+      <footer className='footer'>&copy;2025 Limkokwing University of Creative Technology | All Rights Reserved</footer>
     </div>
+    
   );
 }
 

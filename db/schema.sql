@@ -1,6 +1,4 @@
--- SQL schema for LUCT Lecturer Reporting (MySQL)
-CREATE DATABASE IF NOT EXISTS luct_reporting;
-USE luct_reporting;
+
 
 -- Users
 CREATE TABLE IF NOT EXISTS users (
