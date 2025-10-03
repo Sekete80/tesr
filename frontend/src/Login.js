@@ -5,6 +5,8 @@ function Login({ onLogin }) {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const API_URL = process.env.REACT_APP_API_URL || '';
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setMessage(""); // Clear message when user starts typing
@@ -18,7 +20,7 @@ function Login({ onLogin }) {
     try {
       console.log('Attempting login...', form);
       
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch(`${API_URL}/api/login`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -42,7 +44,7 @@ function Login({ onLogin }) {
       }
     } catch (err) {
       console.error('Login error:', err);
-      setMessage("❌ Network error: Could not connect to server. Make sure the backend is running on port 5000.");
+      setMessage("❌ Network error: Could not connect to server. Make sure the backend is running.");
     } finally {
       setIsLoading(false);
     }

@@ -46,6 +46,8 @@ function ProgramLeaderForm() {
     comments: ''
   });
 
+  const API_URL = process.env.REACT_APP_API_URL || '';
+
   // Tab navigation
   const tabs = [
     { id: 'courses', label: 'Courses' },
@@ -65,7 +67,7 @@ function ProgramLeaderForm() {
   // Function to fetch PRL reports
   const fetchPrlReports = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/prl_reports');
+      const res = await fetch(`${API_URL}/api/prl_reports`);
       if (res.ok) {
         const reports = await res.json();
         setPrlReports(reports);
@@ -95,7 +97,7 @@ function ProgramLeaderForm() {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/export/prl-reports', {
+      const response = await fetch(`${API_URL}/api/export/prl-reports`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -147,7 +149,7 @@ function ProgramLeaderForm() {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/export/program-reports', {
+      const response = await fetch(`${API_URL}/api/export/program-reports`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -195,7 +197,7 @@ function ProgramLeaderForm() {
   const handleCoursesSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/pl_courses', {
+      const res = await fetch(`${API_URL}/api/pl_courses`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(coursesForm),
@@ -213,7 +215,7 @@ function ProgramLeaderForm() {
   const handleClassesSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/pl_classes', {
+      const res = await fetch(`${API_URL}/api/pl_classes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(classesForm),
@@ -236,7 +238,7 @@ function ProgramLeaderForm() {
     }
     
     try {
-      const res = await fetch('http://localhost:5000/api/pl_reports', {
+      const res = await fetch(`${API_URL}/api/pl_reports`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reportsForm),
@@ -256,7 +258,7 @@ function ProgramLeaderForm() {
   const handleMonitoringSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/pl_monitoring', {
+      const res = await fetch(`${API_URL}/api/pl_monitoring`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(monitoringForm),
@@ -274,7 +276,7 @@ function ProgramLeaderForm() {
   const handleRatingSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/pl_rating', {
+      const res = await fetch(`${API_URL}/api/pl_rating`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(ratingForm),

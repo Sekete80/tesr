@@ -44,11 +44,13 @@ function LecturerForm() {
     comments: ''
   });
 
+  const API_URL = process.env.REACT_APP_API_URL || '';
+
   // Fetch available courses on component mount
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/courses');
+        const res = await fetch(`${API_URL}/api/courses`);
         if (res.ok) {
           const courses = await res.json();
           setAvailableCourses(courses);
@@ -58,7 +60,7 @@ function LecturerForm() {
       }
     };
     fetchCourses();
-  }, []);
+  }, [API_URL]);
 
   // Tab navigation
   const tabs = [
@@ -72,7 +74,7 @@ function LecturerForm() {
   const handleClassSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/courses', {
+      const res = await fetch(`${API_URL}/api/courses`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(classForm),
@@ -84,7 +86,7 @@ function LecturerForm() {
           venue: '', scheduled_time: '', total_registered: ''
         });
         // Refresh courses list
-        const coursesRes = await fetch('http://localhost:5000/api/courses');
+        const coursesRes = await fetch(`${API_URL}/api/courses`);
         if (coursesRes.ok) {
           const courses = await coursesRes.json();
           setAvailableCourses(courses);
@@ -102,7 +104,7 @@ function LecturerForm() {
   const handleReportSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/reports', {
+      const res = await fetch(`${API_URL}/api/reports`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reportForm),
@@ -126,7 +128,7 @@ function LecturerForm() {
   const handleMonitoringSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/lecturer_monitoring', {
+      const res = await fetch(`${API_URL}/api/lecturer_monitoring`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(monitoringForm),
@@ -152,7 +154,7 @@ function LecturerForm() {
   const handleRatingSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/lecturer_rating', {
+      const res = await fetch(`${API_URL}/api/lecturer_rating`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(ratingForm),

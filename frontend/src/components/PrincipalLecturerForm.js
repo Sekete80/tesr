@@ -46,6 +46,8 @@ function PrincipalLecturerForm() {
     comments: ''
   });
 
+  const API_URL = process.env.REACT_APP_API_URL || '';
+
   // Tab navigation - ALL 5 FUNCTIONS
   const tabs = [
     { id: 'courses', label: 'Courses' },
@@ -65,7 +67,7 @@ function PrincipalLecturerForm() {
   // Function to fetch lecturer reports
   const fetchLecturerReports = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/reports');
+      const res = await fetch(`${API_URL}/api/reports`);
       if (res.ok) {
         const reports = await res.json();
         setLecturerReports(reports);
@@ -93,7 +95,7 @@ function PrincipalLecturerForm() {
     e.preventDefault();
     try {
       // Use pl_courses instead of prl_courses for Principal Lecturer
-      const res = await fetch('http://localhost:5000/api/pl_courses', {
+      const res = await fetch(`${API_URL}/api/pl_courses`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -122,7 +124,7 @@ function PrincipalLecturerForm() {
   const handleClassesSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/pl_classes', {
+      const res = await fetch(`${API_URL}/api/pl_classes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -155,7 +157,7 @@ function PrincipalLecturerForm() {
     }
     
     try {
-      const res = await fetch('http://localhost:5000/api/prl_reports', {
+      const res = await fetch(`${API_URL}/api/prl_reports`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reportsForm),
@@ -180,7 +182,7 @@ function PrincipalLecturerForm() {
   const handleMonitoringSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/pl_monitoring', {
+      const res = await fetch(`${API_URL}/api/pl_monitoring`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -208,7 +210,7 @@ function PrincipalLecturerForm() {
   const handleRatingSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/pl_rating', {
+      const res = await fetch(`${API_URL}/api/pl_rating`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

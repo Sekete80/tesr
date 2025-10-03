@@ -25,6 +25,8 @@ function StudentForm() {
   const [attendanceRecorded, setAttendanceRecorded] = useState(false);
   const [attendanceTime, setAttendanceTime] = useState('');
 
+  const API_URL = process.env.REACT_APP_API_URL || '';
+
   // Tab navigation
   const tabs = [
     { id: 'monitoring', label: 'Monitoring' },
@@ -45,7 +47,7 @@ function StudentForm() {
         sign_in_time: currentTime
       };
 
-      const res = await fetch('http://localhost:5000/api/student_monitoring', {
+      const res = await fetch(`${API_URL}/api/student_monitoring`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(attendanceData),
@@ -73,7 +75,7 @@ function StudentForm() {
   const handleMonitoringSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/student_monitoring', {
+      const res = await fetch(`${API_URL}/api/student_monitoring`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(monitoringForm),
@@ -96,7 +98,7 @@ function StudentForm() {
   const handleRatingSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/student_ratings', {
+      const res = await fetch(`${API_URL}/api/student_ratings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(ratingForm),
@@ -145,6 +147,57 @@ function StudentForm() {
         <div>
           <h4>Class Monitoring & Attendance</h4>
           
+          {/* Quick Attendance Section */}
+          <div className="card mb-4">
+            <div className="card-header bg-primary text-white">
+              <h5 className="mb-0">Quick Attendance Sign-in</h5>
+            </div>
+            <div className="card-body">
+              <div className="row g-3 align-items-end">
+                <div className="col-md-4">
+                  <label className="form-label">Student ID</label>
+                  <input 
+                    type="text" 
+                    name="student_id" 
+                    className="form-control" 
+                    placeholder="Enter Student ID"
+                    value={monitoringForm.student_id} 
+                    onChange={handleChange(setMonitoringForm, monitoringForm)} 
+                    required 
+                  />
+                </div>
+                <div className="col-md-4">
+                  <label className="form-label">Course ID</label>
+                  <input 
+                    type="text" 
+                    name="course_id" 
+                    className="form-control" 
+                    placeholder="Enter Course ID"
+                    value={monitoringForm.course_id} 
+                    onChange={handleChange(setMonitoringForm, monitoringForm)} 
+                    required 
+                  />
+                </div>
+                <div className="col-md-4">
+                  <button 
+                    className="btn btn-success w-100" 
+                    type="button"
+                    onClick={handleQuickAttendance}
+                    disabled={attendanceRecorded}
+                  >
+                    {attendanceRecorded ? 'Attendance Recorded' : 'Sign In Attendance'}
+                  </button>
+                </div>
+              </div>
+              
+              {attendanceRecorded && (
+                <div className="alert alert-success mt-3 mb-0" role="alert">
+                  <strong>Attendance confirmed!</strong> Signed in at: {attendanceTime}
+                </div>
+              )}
+            </div>
+          </div>
+
           {/* Detailed Monitoring Form */}
           <div className="card">
             <div className="card-header">
